@@ -6,18 +6,18 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2024/12/25 11:11:34 by yaait-am         ###   ########.fr       */
+/*   Updated: 2024/12/25 21:15:23 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
-#define FDF_H
+# define FDF_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 9
-
 # endif
 
+# include "mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 
