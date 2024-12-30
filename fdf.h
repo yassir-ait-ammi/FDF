@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2024/12/25 21:15:23 by yaait-am         ###   ########.fr       */
+/*   Updated: 2024/12/27 10:53:47 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #  define BUFFER_SIZE 9
 # endif
 
-# include "mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 
