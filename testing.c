@@ -1,6 +1,7 @@
 #include "fdf.h"
 
 int ofsset_x = 1;
+int zz;
 
 void put_pixel_to_image(t_image *image, int x, int y, int color)
 {
@@ -14,6 +15,13 @@ void put_pixel_to_image(t_image *image, int x, int y, int color)
 int interpolate(int start, int end, float t)
 {
 	return (int)(start + t * (end - start));
+}
+
+void ft_z(int *z)
+{
+	if (!zz || *z < 5)
+		return ;
+	*z *= zz;
 }
 
 void extract_rgb(int color, int *r, int *g, int *b)
@@ -105,8 +113,8 @@ void print_grid(t_image *image, int **map, int lines, int line_size)
 	int x1 = grid_center_x * scale;
 	int y1 = grid_center_y * scale;
 	isometric(&x1, &y1, 0);
-	int x_offset = (1000 / 2) - x1;
-	int y_offset = (1000 / 2) - y1;
+	int x_offset = (1000 / 2) - x1 + xu;
+	int y_offset = (1000 / 2) - y1 + yu;
 	int y = 0;
 	int x;
 	while (y < lines)
@@ -115,6 +123,7 @@ void print_grid(t_image *image, int **map, int lines, int line_size)
 		while (x < line_size)
 		{
 			int z = map[y][x];
+			ft_z(&z);
 			int color = g_dd[y * line_size + x];
 			ft_help(z, &color);
 			x1 = x * scale;
@@ -236,23 +245,57 @@ void parsing(char **d)
 	}
 }
 
+void free_map(int **map, int lines)
+{
+    int i = 0;
+    while (i < lines)
+    {
+        free(map[i]);
+        i++;
+    }
+    free(map);
+}
+
+void cleanup(t_data *data)
+{
+    mlx_destroy_image(data->mlx, data->image.img);
+    mlx_destroy_window(data->mlx, data->win);
+    free_map(data->map, data->lines);
+    free(g_dd);
+}
+
 int handle_key(int keycode, void *param)
 {
 	t_data *data = (t_data *)param;
-	if (keycode == ESC_KEY)
-		exit(0);
-	else if (keycode == UP)
+    if (keycode == ESC_KEY)
+        exit(0);
+	else if (keycode == AFLA)
 		ofsset_x = 0;
 	if (keycode == 99)
 		kk = 1;
-	else if (keycode == DOWN)
+	else if (keycode == 118)
+		kk = 0;
+	if (keycode == IZDAR)
 		ofsset_x = 1;
+	if (keycode == FOK)
+		yu -= 20;
+	else if (keycode == TAHT)
+		yu += 20;
+	else if (keycode == LISSR)
+		xu -= 20;
+	else if (keycode == LIMN)
+		xu += 20;
 	if (keycode == 114)
 	{
 		kk = 0;
 		zoom = 0.1;
 		ofsset_x = 1;
+		xu = 0;
+		yu = 0;
+		zz = 0;
 	}
+	if (keycode == Z)
+		zz++;
 	mlx_destroy_image(data->mlx, data->image.img);
 	data->image.img = mlx_new_image(data->mlx, WINDOW_SIZE, WINDOW_SIZE);
 	data->image.addr = mlx_get_data_addr(data->image.img, &data->image.bits_per_pixel, &data->image.line_length, &data->image.endian);
@@ -261,6 +304,16 @@ int handle_key(int keycode, void *param)
 	return (0);
 }
 
+int render(void *param)
+{
+    t_data *data = (t_data *)param;
+
+    mlx_clear_window(data->mlx, data->win);
+    print_grid(&data->image, data->map, data->lines, data->line_size);
+    mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
+	mlx_string_put(data->mlx, data->win, 40, 40, 0xFFFFFF, "this is it ??");
+	return (0);
+}
 
 int handle_mouse(int button, int x, int y, void *param)
 {
@@ -276,7 +329,7 @@ int handle_mouse(int button, int x, int y, void *param)
 	mlx_destroy_image(data->mlx, data->image.img);
 	data->image.img = mlx_new_image(data->mlx, WINDOW_SIZE, WINDOW_SIZE);
 	data->image.addr = mlx_get_data_addr(data->image.img, &data->image.bits_per_pixel, &data->image.line_length, &data->image.endian);
-
+	// mlx_loop_hook(data->mlx, render, &data);
 	print_grid(&data->image, data->map, data->lines, data->line_size);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
 	return (0);
@@ -297,6 +350,7 @@ int main(int ac, char **av)
 
 	print_grid(&data.image, data.map, data.lines, data.line_size);
 	mlx_put_image_to_window(data.mlx, data.win, data.image.img, 0, 0);
+	mlx_loop_hook(data.mlx, render, &data);
 	mlx_key_hook(data.win, handle_key, &data);
 	mlx_mouse_hook(data.win, handle_mouse, &data);
 	mlx_loop(data.mlx);

@@ -19,19 +19,26 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <math.h>
+#include <string.h>
 
 #define ESC_KEY 65307
 #define WINDOW_SIZE 1000
 #define ZOOM_IN 4
 #define ZOOM_OUT 5
-#define UP 117
-#define DOWN 100
+#define AFLA 117
+#define IZDAR 100
 #define PLUS 65451
 #define MINUS 65453
-
+#define FOK 65362
+#define TAHT 65364
+#define LIMN 65363
+#define LISSR 65361 
+#define Z 122
 long int *g_dd;
 float zoom = 0.1;
 int kk;
+int xu;
+int yu;
 
 typedef struct s_image {
 	void *img;
