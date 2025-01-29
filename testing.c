@@ -1,6 +1,10 @@
 #include "fdf.h"
 
+double angle = 0.0;
 int ofsset_x = 1;
+int x_offset = 0;
+int z_offset = 0;
+int y_offset = 0;
 int zz;
 
 void put_pixel_to_image(t_image *image, int x, int y, int color)
@@ -73,25 +77,52 @@ void draw_line_image(t_image *image, int x1, int y1, int x2, int y2, int color1,
 	}
 }
 
-void isometric(int *x, int *y, int z)
+
+void isometric(int *x, int *y, int z, double angle)
 {
-	if (!ofsset_x)
-		return ;
-	int prev_x = *x;
-	int prev_y = *y;
-	*x = (prev_x - prev_y) * cos(0.523599);
-	*y = ((prev_x + prev_y) * sin(0.523599) - z);
+    if (!x || !y || !ofsset_x)
+        return;
+
+    int prev_x = *x;
+    int prev_y = *y;
+    int iso_x, iso_y;
+    if (z_offset)
+    {
+        int new_x = prev_x * cos(angle) - prev_y * sin(angle);
+        int new_y = prev_x * sin(angle) + prev_y * cos(angle);
+		*x = new_x;
+		*y = new_y;
+    }
+	if (x_offset)
+    {
+        int new_y = prev_y * cos(angle) - z * sin(angle);
+        int new_z = prev_y * sin(angle) + z * cos(angle);
+		z = new_z;
+		*y = new_y;
+    }
+ 	if (y_offset)
+    {
+        int new_x = prev_x * cos(angle) - z * sin(angle);
+        int new_z = prev_x * sin(angle) + z * cos(angle);
+		z = new_z;
+		*x = new_x;
+    }
+    iso_x = (*x - *y) * cos(0.523599);
+    iso_y = ((*x + *y) * sin(0.523599) - z);
+    *x = iso_x;
+    *y = iso_y;
 }
+
 
 void	ft_help(int z, int *color)
 {
 	if (!kk)
 		return ;
-	if (z <= 5)
+	if (z <= 2)
 		*color = 0x0000ff;
-	else if ( z > 0 && z <= 15)
+	else if (z <= 50)
 		*color = 0x00ff00;
-	else if (z <= 80)
+	else if (z <= 200)
 		*color = 0x802020;
 	else
 		*color = 0xffffff;
@@ -112,7 +143,7 @@ void print_grid(t_image *image, int **map, int lines, int line_size)
 	int grid_center_y = (lines - 1) / 2;
 	int x1 = grid_center_x * scale;
 	int y1 = grid_center_y * scale;
-	isometric(&x1, &y1, 0);
+	isometric(&x1, &y1, 0, angle);
 	int x_offset = (1000 / 2) - x1 + xu;
 	int y_offset = (1000 / 2) - y1 + yu;
 	int y = 0;
@@ -128,7 +159,7 @@ void print_grid(t_image *image, int **map, int lines, int line_size)
 			ft_help(z, &color);
 			x1 = x * scale;
 			y1 = y * scale;
-			isometric(&x1, &y1, z);
+			isometric(&x1, &y1, z, angle);
 			x1 += x_offset;
 			y1 += y_offset;
 			put_pixel_to_image(image, x1, y1, color);
@@ -136,7 +167,7 @@ void print_grid(t_image *image, int **map, int lines, int line_size)
 				int z_next = map[y][x + 1];
 				int x2 = (x + 1) * scale;
 				int y2 = y * scale;
-				isometric(&x2, &y2, z_next);
+				isometric(&x2, &y2, z_next, angle);
 				x2 += x_offset;
 				y2 += y_offset;
 				draw_line_image(image, x1, y1, x2, y2, color, g_dd[y * line_size + x + 1]);
@@ -145,7 +176,7 @@ void print_grid(t_image *image, int **map, int lines, int line_size)
 				int z_next = map[y + 1][x];
 				int x2 = x * scale;
 				int y2 = (y + 1) * scale;
-				isometric(&x2, &y2, z_next);
+				isometric(&x2, &y2, z_next, angle);
 				x2 += x_offset;
 				y2 += y_offset;
 				draw_line_image(image, x1, y1, x2, y2, color, g_dd[(y + 1) * line_size + x]);
@@ -293,9 +324,43 @@ int handle_key(int keycode, void *param)
 		xu = 0;
 		yu = 0;
 		zz = 0;
+		angle = 0.5;
+		x_offset = 0;
+		z_offset = 0;
+		y_offset = 0;
 	}
 	if (keycode == Z)
 		zz++;
+	if (keycode == Z_AZLMAD)
+	{
+		z_offset = 1;
+		angle += 0.5;
+	}
+	else if (keycode == Z_AFASSIY)
+	{
+		z_offset = 1;
+		angle -= 0.5;
+	}
+	if (keycode == X_AZLMAD)
+	{
+		x_offset = 1;
+		angle += 0.5;
+	}
+	else if (keycode == X_AFASSIY)
+	{
+		x_offset = 1;
+		angle -= 0.5;
+	}
+	if (keycode == Y_AZLMAD)
+	{
+		y_offset = 1;
+		angle += 0.5;
+	}
+	else if (keycode == Y_AFASSIY)
+	{
+		y_offset = 1;
+		angle -= 0.5;
+	}
 	mlx_destroy_image(data->mlx, data->image.img);
 	data->image.img = mlx_new_image(data->mlx, WINDOW_SIZE, WINDOW_SIZE);
 	data->image.addr = mlx_get_data_addr(data->image.img, &data->image.bits_per_pixel, &data->image.line_length, &data->image.endian);
@@ -341,6 +406,18 @@ int main(int ac, char **av)
 		printf("Usage: ./test <file map name>\n");
 		exit(1);
 	}
+	int fd = open(av[1], O_RDONLY);
+	if (fd < 0) {
+		perror("Error opening file");
+		exit(1);
+	}
+	char buf;
+	if (read(fd, &buf, 1) == 0)
+	{
+		printf("Error :invalid map\n");
+		exit(1);
+	}
+	close(fd);
 	t_data data;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WINDOW_SIZE, WINDOW_SIZE, "FDF Zoom");

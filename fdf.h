@@ -20,6 +20,8 @@
 #include <unistd.h>
 #include <math.h>
 #include <string.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 #define ESC_KEY 65307
 #define WINDOW_SIZE 1000
@@ -34,6 +36,12 @@
 #define LIMN 65363
 #define LISSR 65361 
 #define Z 122
+#define Z_AFASSIY 65431
+#define Z_AZLMAD 65433
+#define X_AFASSIY 65432
+#define X_AZLMAD 65430
+#define Y_AFASSIY 65434
+#define Y_AZLMAD 65436
 long int *g_dd;
 float zoom = 0.1;
 int kk;
