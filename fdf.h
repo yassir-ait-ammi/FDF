@@ -42,6 +42,9 @@
 #define X_AZLMAD 65430
 #define Y_AFASSIY 65434
 #define Y_AZLMAD 65436
+#define X 120
+#define COLOR 99
+#define ANTI_COLOR 118
 long int *g_dd;
 float zoom = 0.1;
 int kk;
@@ -67,6 +70,7 @@ typedef struct s_data {
 
 char	**ft_split(char *s, char *charset);
 void    parsing(char **d);
+int render(void *param);
 
 
 #endif

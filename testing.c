@@ -302,9 +302,9 @@ int handle_key(int keycode, void *param)
         exit(0);
 	else if (keycode == AFLA)
 		ofsset_x = 0;
-	if (keycode == 99)
+	if (keycode == COLOR)
 		kk = 1;
-	else if (keycode == 118)
+	else if (keycode == ANTI_COLOR)
 		kk = 0;
 	if (keycode == IZDAR)
 		ofsset_x = 1;
@@ -331,6 +331,8 @@ int handle_key(int keycode, void *param)
 	}
 	if (keycode == Z)
 		zz++;
+	else if (keycode == X)
+		zz--;
 	if (keycode == Z_AZLMAD)
 	{
 		z_offset = 1;
@@ -366,6 +368,7 @@ int handle_key(int keycode, void *param)
 	data->image.addr = mlx_get_data_addr(data->image.img, &data->image.bits_per_pixel, &data->image.line_length, &data->image.endian);
 	print_grid(&data->image, data->map, data->lines, data->line_size);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
+	render(data);
 	return (0);
 }
 
@@ -376,7 +379,17 @@ int render(void *param)
     mlx_clear_window(data->mlx, data->win);
     print_grid(&data->image, data->map, data->lines, data->line_size);
     mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
-	mlx_string_put(data->mlx, data->win, 40, 40, 0xFFFFFF, "this is it ??");
+	mlx_string_put(data->mlx, data->win, 40, 40, 0xFFFFFF, "this is my FDF");
+	mlx_string_put(data->mlx, data->win, 40, 60, 0xFFFFFF, "here a resume of the key and its works :");
+	mlx_string_put(data->mlx, data->win, 40, 80, 0xFFFFFF, "R -> back to the original | C -> color | V -> anti color");
+	mlx_string_put(data->mlx, data->win, 40, 100, 0xFFFFFF, "U -> up view | D -> down view");
+	mlx_string_put(data->mlx, data->win, 40, 120, 0xFFFFFF, "Z -> to increment | X -> to decrement the z of all the point");	
+	mlx_string_put(data->mlx, data->win, 40, 140, 0xFFFFFF, "'6 and 4' -> retate with the X axais");
+	mlx_string_put(data->mlx, data->win, 40, 160, 0xFFFFFF, "'1 and 9' -> retate with the Y axais");
+	mlx_string_put(data->mlx, data->win, 40, 180, 0xFFFFFF, "'2 and 8' -> retate with the Z axais");
+	mlx_string_put(data->mlx, data->win, 40, 200, 0xFFFFFF, "use the mouse to zoom in and zoom out");
+	mlx_string_put(data->mlx, data->win, 40, 220, 0xFFFFFF, "arrows are to move the map the way you like");
+	mlx_string_put(data->mlx, data->win, 40, 240, 0xFFFFFF, "I hope that you like it!");
 	return (0);
 }
 
