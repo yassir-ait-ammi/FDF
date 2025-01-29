@@ -186,7 +186,7 @@ int **read_map(const char *filename, int *lines, int *line_size)
 	parsing(d);
 	*line_size = count_word(s) / h;
 	*lines = h;
-	int **map = malloc(h * sizeof(int *));
+	int **map = malloc((h + 1) * sizeof(int *));
 	int i = 0;
 	while (i <= h)
 	{

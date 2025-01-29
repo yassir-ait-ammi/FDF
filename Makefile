@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc  -Wall -Wextra -Werror
+CC = gcc  -Wall -Wextra -Werror 
 NAME = fdf
 NAME_BONUS = .bonus
 SRC = fdf.c ft_split.c
