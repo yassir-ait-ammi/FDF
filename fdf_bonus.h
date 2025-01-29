@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 #include <mlx.h>
 #include <stdlib.h>
@@ -25,8 +25,37 @@
 
 #define ESC_KEY 65307
 #define WINDOW_SIZE 1000
-
+#define ZOOM_IN 4
+#define ZOOM_OUT 5
+#define AFLA 117
+#define IZDAR 100
+#define PLUS 65451
+#define MINUS 65453
+#define FOK 65362
+#define TAHT 65364
+#define LIMN 65363
+#define LISSR 65361 
+#define Z 122
+#define Z_AFASSIY 65431
+#define Z_AZLMAD 65433
+#define X_AFASSIY 65432
+#define X_AZLMAD 65430
+#define Y_AFASSIY 65434
+#define Y_AZLMAD 65436
+#define X 120
+#define COLOR 99
+#define ANTI_COLOR 118
 long int *g_dd;
+float zoom = 0.1;
+int kk;
+int xu;
+int yu;
+double angle = 0.0;
+int ofsset_x = 1;
+int x_offset = 0;
+int z_offset = 0;
+int y_offset = 0;
+int zz;
 
 typedef struct s_image {
 	void *img;

@@ -10,11 +10,36 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc  -Wall -Wextra -Werror testing.c ft_split.c -Lminilibx_folder -lmlx -lXext -lX11 -lm -o fdf
+CC = gcc  -Wall -Wextra -Werror
+NAME = fdf
+NAME_BONUS = .bonus
+SRC = fdf.c ft_split.c
+BOF = fdf_bonus.c ft_split.c 
+ML_F = -lmlx -lXext -lX11 -Lminilibx_folder
+MATH = -lm
 
-all: banner
-	@echo "\n"
-	@$(CC) && ./fdf test_maps/julia.fdf
+all: $(NAME)
+
+$(NAME) : banner
+		@rm -rf $(NAME_BONUS)
+		@$(CC) $(SRC) $(ML_F) $(MATH) -o $(NAME)
+
+bonus : $(NAME_BONUS)
+
+$(NAME_BONUS) : banner
+	@touch $(NAME_BONUS)
+	@$(CC) $(BOF) $(ML_F) $(MATH) -o $(NAME)
+
+clean : 
+	@rm -rf $(NAME_BONUS)
+
+fclean : clean
+	@rm -rf $(NAME)
+
+re : fclean all
+
+.PHONY : all fclean clean re 
+
 banner:
 	@echo " \033[32m  ____   ____    _____	\033[0m	\033[31m⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀  \033[0m"
 	@echo "\033[32m |  ___| |  _ \  |  ___| \033[0m	\033[31m ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀\033[0m"
