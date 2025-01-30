@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:25:54 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/30 19:22:23 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/01/30 21:32:29 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_alloc(t_cord **poi, t_cord **sec, t_cord **scal, t_cord **cen)
 	(*scal) = malloc(sizeof(t_cord));
 	(*cen) = malloc(sizeof(t_cord));
 	if (!*sec || !*scal || !*cen)
-        return;
+		return ;
 	(*scal)->x = (1000 / (*poi)->line_size);
 	(*scal)->y = (1000 / (*poi)->line);
 	if ((*scal)->x < (*scal)->y)
@@ -94,7 +94,6 @@ void	ft_pass_to_draw(t_cord **sec, t_cord **poi, t_cord **cen, t_cord **scal)
 	(*poi)->color = (*(*poi)->g_dd)[(*cen)->y * (*poi)->line_size + (*cen)->x];
 	put_pix(&(*poi), &(*cen), &(*scal), &(*sec));
 	put_pixel_to_image((*poi)->image, (*poi)->x, (*poi)->y, (*poi)->color);
-
 	if ((*cen)->x + 1 < (*poi)->line_size)
 	{
 		(*poi)->z = (*poi)->map[(*cen)->y][(*cen)->x + 1];

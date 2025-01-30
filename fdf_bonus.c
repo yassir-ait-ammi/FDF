@@ -406,7 +406,7 @@ int render(void *param)
 	mlx_string_put(data->mlx, data->win, 40, 60, 0xFFFFFF, "here a resume of the key and its works :");
 	mlx_string_put(data->mlx, data->win, 40, 80, 0xFFFFFF, "R -> back to the original | C -> color | V -> anti color");
 	mlx_string_put(data->mlx, data->win, 40, 100, 0xFFFFFF, "U -> up view | D -> down view");
-	mlx_string_put(data->mlx, data->win, 40, 120, 0xFFFFFF, "Z -> to increment | X -> to decrement the z of all the point");	
+	mlx_string_put(data->mlx, data->win, 40, 120, 0xFFFFFF, "Z -> to increment | X -> to decrement the z of all the point");
 	mlx_string_put(data->mlx, data->win, 40, 140, 0xFFFFFF, "'6 and 4' -> retate with the X axais");
 	mlx_string_put(data->mlx, data->win, 40, 160, 0xFFFFFF, "'1 and 9' -> retate with the Y axais");
 	mlx_string_put(data->mlx, data->win, 40, 180, 0xFFFFFF, "'2 and 8' -> retate with the Z axais");

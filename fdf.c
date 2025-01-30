@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:24:04 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/30 19:27:18 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/01/30 21:31:26 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,80 +31,38 @@ int	count_word(char *s)
 	return (count);
 }
 
-int	**read_map(const char *filename, int *lines, int *line_size, long int **g_dd)
+int	**read_map(const char *filename, int *len, int *size, long int **g_dd)
 {
-	int		fd;
-	int		k;
-	int		h;
-	char	buf;
-	char	*s;
-	int		**map;
-	char	**d;
+	t_fd	fd;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	help_read_map(&fd.fd, filename, &fd.k, &fd.h);
+	fd.s = malloc(fd.k + 1);
+	fd.fd = open(filename, O_RDONLY);
+	fd.k = 0;
+	while (read(fd.fd, &fd.s[fd.k], 1) > 0)
+		fd.k++;
+	fd.s[fd.k] = '\0';
+	close(fd.fd);
+	fd.d = ft_split(fd.s, " \n");
+	*g_dd = parsing(fd.d);
+	*size = count_word(fd.s) / fd.h;
+	*len = fd.h;
+	fd.map = malloc((fd.h + 1) * sizeof(int *));
+	fd.k = 0;
+	while (fd.k <= fd.h)
 	{
-		perror("Error opening file");
-		exit(1);
+		fd.map[fd.k] = malloc((*size) * sizeof(int));
+		fd.k++;
 	}
-	k = 0;
-	h = 0;
-	while (read(fd, &buf, 1) > 0)
-	{
-		if (buf == '\n')
-			h++;
-		k++;
-	}
-	close(fd);
-	s = malloc(k + 1);
-	fd = open(filename, O_RDONLY);
-	k = 0;
-	while (read(fd, &s[k], 1) > 0)
-		k++;
-	s[k] = '\0';
-	close(fd);
-	d = ft_split(s, " \n");
-	*g_dd = parsing(d);
-	*line_size = count_word(s) / h;
-	*lines = h;
-	map = malloc((h + 1) * sizeof(int *));
-	k = 0;
-	while (k <= h)
-	{
-		map[k] = malloc((*line_size) * sizeof(int));
-		k++;
-	}
-	ft_help_read(&map, &d, *line_size);
-	return (free_split(d), free(s), map);
-}
-
-void	ft_help_read(int ***map, char ***d, int line_size)
-{
-	int	fd;
-	int	h;
-	int	k;
-
-	fd = 0;
-	h = 0;
-	k = 0;
-	while ((*d)[fd])
-	{
-		(*map)[k][h] = strtol((*d)[fd], NULL, 10);
-		h++;
-		if (h == line_size)
-		{
-			h = 0;
-			k++;
-		}
-		fd++;
-	}
+	ft_help_read(&fd.map, &fd.d, *size);
+	return (free_split(fd.d), free(fd.s), fd.map);
 }
 
 long int	*parsing(char **d)
 {
-	int		i;
-	int		count;
-	char	**c;
+	int			i;
+	int			count;
+	char		**c;
 	long int	*g_dd;
 
 	i = 0;
@@ -118,7 +76,10 @@ long int	*parsing(char **d)
 	while (d[i])
 	{
 		c = ft_split(d[i], ",");
-		g_dd[i] = (c[1]) ? strtol(c[1], NULL, 16) : 0xffffff;
+		if (c[1])
+			g_dd[i] = strtol(c[1], NULL, 16);
+		else
+			g_dd[i] = 0xffffff;
 		free_split(c);
 		i++;
 	}
@@ -133,7 +94,7 @@ int	handle_key(int keycode, void *param)
 	if (keycode == ESC_KEY)
 	{
 		cleanup(data, NULL);
-		exit(1);
+		exit(0);
 	}
 	else
 		return (0);
@@ -141,8 +102,8 @@ int	handle_key(int keycode, void *param)
 
 int	main(int ac, char **av)
 {
-	t_data	data;
-	t_cord	*main;
+	t_data		data;
+	t_cord		*main;
 	long int	*g_dd;
 
 	parsing_the_map(ac, av, &data, &g_dd);

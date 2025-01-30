@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/30 19:28:05 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/01/30 21:28:01 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,18 @@ typedef struct s_cord
 	long int	**g_dd;
 }		t_cord;
 
+typedef struct s_fd
+{
+	int		fd;
+	int		k;
+	int		h;
+	char	buf;
+	char	*s;
+	int		**map;
+	char	**d;
+}		t_fd;
+
+
 int			main(int ac, char **av);
 char		**ft_split(char *s, char *charset);
 long int	*parsing(char **d);
@@ -84,5 +96,6 @@ void		put_pix(t_cord **poi, t_cord **cen, t_cord **scal, t_cord **sec);
 void		ft_alloc(t_cord **poi, t_cord **sec, t_cord **	scal, t_cord **cen);
 void		ft_pass_to_draw(t_cord **sec, t_cord **poi, t_cord **cen, t_cord **scal);
 void		parsing_the_map(int ac, char **av, t_data *data, long int **g_dd);
+void		help_read_map(int *fd, const char *filename, int *k, int *h);
 
 #endif
