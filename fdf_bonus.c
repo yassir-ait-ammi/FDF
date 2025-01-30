@@ -70,7 +70,6 @@ void draw_line_image(t_image *image, int x1, int y1, int x2, int y2, int color1,
 	}
 }
 
-
 void isometric(int *x, int *y, int z, double angle)
 {
     if (!x || !y || !ofsset_x)
@@ -196,6 +195,17 @@ int count_word(char *s)
 	return count;
 }
 
+void free_split(char **split)
+{
+    int i = 0;
+    while (split[i])
+    {
+        free(split[i]);
+        i++;
+    }
+    free(split);
+}
+
 int **read_map(const char *filename, int *lines, int *line_size)
 {
 	int fd = open(filename, O_RDONLY);
@@ -224,7 +234,7 @@ int **read_map(const char *filename, int *lines, int *line_size)
 	parsing(d);
 	*line_size = count_word(s) / h;
 	*lines = h;
-	int **map = malloc(h * sizeof(int *));
+	int **map = malloc((h + 1) * sizeof(int *));
 	int i = 0;
 	while (i <= h)
 	{
@@ -244,6 +254,7 @@ int **read_map(const char *filename, int *lines, int *line_size)
 		}
 		a++;
 	}
+	free_split(d);
 	free(s);
 	return map;
 }
@@ -256,14 +267,15 @@ void parsing(char **d)
 	while (d[count])
 		count++;
 	g_dd = malloc(count * sizeof(long int));
-
+	if (!g_dd)
+		return ;
 	char **c;
 	i = 0;
 	while (d[i])
 	{
 		c = ft_split(d[i], ",");
 		g_dd[i] = (c[1]) ? strtol(c[1], NULL, 16) : 0xffffff;
-		free(c);
+		free_split(c);
 		i++;
 	}
 }
@@ -271,27 +283,46 @@ void parsing(char **d)
 void free_map(int **map, int lines)
 {
     int i = 0;
-    while (i < lines)
+    while (i <= lines)
     {
         free(map[i]);
         i++;
     }
-    free(map);
+	if (map)
+    {
+		free(map);
+		map = NULL;
+	}
 }
 
 void cleanup(t_data *data)
 {
-    mlx_destroy_image(data->mlx, data->image.img);
-    mlx_destroy_window(data->mlx, data->win);
-    free_map(data->map, data->lines);
-    free(g_dd);
+    if (data->image.img)
+        mlx_destroy_image(data->mlx, data->image.img);
+    if (data->win)
+        mlx_destroy_window(data->mlx, data->win);
+    if (data->map) {
+        free_map(data->map, data->lines);
+        data->map = NULL;
+    }
+    if (g_dd) {
+        free(g_dd);
+        g_dd = NULL;
+    }
+    if (data->mlx) {
+        mlx_destroy_display(data->mlx);
+        free(data->mlx);
+    }
 }
 
 int handle_key(int keycode, void *param)
 {
 	t_data *data = (t_data *)param;
     if (keycode == ESC_KEY)
-        exit(0);
+	{
+		cleanup(data);
+	    exit(0);
+	}
 	else if (keycode == AFLA)
 		ofsset_x = 0;
 	if (keycode == COLOR)
@@ -407,6 +438,7 @@ int handle_mouse(int button, int x, int y, void *param)
 
 int main(int ac, char **av)
 {
+	t_data data;
 	if (ac != 2) {
 		printf("Usage: ./test <file map name>\n");
 		exit(1);
@@ -414,27 +446,28 @@ int main(int ac, char **av)
 	int fd = open(av[1], O_RDONLY);
 	if (fd < 0) {
 		perror("Error opening file");
+		cleanup(&data);
 		exit(1);
 	}
 	char buf;
 	if (read(fd, &buf, 1) == 0)
 	{
 		printf("Error :invalid map\n");
+		cleanup(&data);
 		exit(1);
 	}
 	close(fd);
-	t_data data;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WINDOW_SIZE, WINDOW_SIZE, "FDF Zoom");
 	data.map = read_map(av[1], &data.lines, &data.line_size);
 	data.image.img = mlx_new_image(data.mlx, WINDOW_SIZE, WINDOW_SIZE);
 	data.image.addr = mlx_get_data_addr(data.image.img, &data.image.bits_per_pixel, &data.image.line_length, &data.image.endian);
-
 	print_grid(&data.image, data.map, data.lines, data.line_size);
 	mlx_put_image_to_window(data.mlx, data.win, data.image.img, 0, 0);
 	mlx_loop_hook(data.mlx, render, &data);
 	mlx_key_hook(data.win, handle_key, &data);
 	mlx_mouse_hook(data.win, handle_mouse, &data);
 	mlx_loop(data.mlx);
+	cleanup(&data);
 	return 0;
 }
