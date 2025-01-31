@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"stdlib.h": "c",
-		"fdf_bonus.h": "c"
+		"fdf_bonus.h": "c",
+		"limits.h": "c"
 	}
 }

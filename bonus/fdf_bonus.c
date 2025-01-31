@@ -121,8 +121,8 @@ void	ft_help(int z, int *color)
 
 void print_grid(t_image *image, int **map, int lines, int line_size)
 {
-	int scale_x = (1000 / line_size) * zoom;
-	int scale_y = (1000 / lines) * zoom;
+	int scale_x = (WINDOW_SIZE / line_size) * zoom;
+	int scale_y = (WINDOW_SIZE / lines) * zoom;
 	int scale = (scale_x < scale_y) ? scale_x : scale_y;
 	int grid_center_x = (line_size - 1) / 2;
 	if (scale > 20)
@@ -135,8 +135,8 @@ void print_grid(t_image *image, int **map, int lines, int line_size)
 	int x1 = grid_center_x * scale;
 	int y1 = grid_center_y * scale;
 	isometric(&x1, &y1, 0, angle);
-	int x_offset = (1000 / 2) - x1 + xu;
-	int y_offset = (1000 / 2) - y1 + yu;
+	int x_offset = (WINDOW_SIZE / 2) - x1 + xu;
+	int y_offset = (WINDOW_SIZE / 2) - y1 + yu;
 	int y = 0;
 	int x;
 	while (y < lines)
@@ -245,7 +245,7 @@ int **read_map(const char *filename, int *lines, int *line_size)
 	i = 0;
 	while (d[a])
 	{
-		map[i][v] = strtol(d[a], NULL, 10);
+		map[i][v] = ft_atoi_base(d[a], NULL, 10);
 		v++;
 		if (v == *line_size)
 		{
@@ -274,7 +274,7 @@ void parsing(char **d)
 	while (d[i])
 	{
 		c = ft_split(d[i], ",");
-		g_dd[i] = (c[1]) ? strtol(c[1], NULL, 16) : 0xffffff;
+		g_dd[i] = (c[1]) ? ft_atoi_base(c[1], NULL, 16) : 0xffffff;
 		free_split(c);
 		i++;
 	}

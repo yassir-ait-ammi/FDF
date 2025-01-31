@@ -6,7 +6,7 @@
 #    By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 09:32:32 by dpoveda-          #+#    #+#              #
-#    Updated: 2025/01/30 19:26:32 by yaait-am         ###   ########.fr        #
+#    Updated: 2025/01/31 16:18:22 by yaait-am         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,9 @@ CC = cc  -Wall -Wextra -Werror
 TARGET = fdf
 NAME_BONUS = .bonus
 NAME = .name
-SRC = fdf.c ft_split.c color.c draw.c clean.c print_grid.c draw_utiliz.c helper_function.c
-BOF = fdf_bonus.c ft_split.c
+SRC = mandatory/fdf.c mandatory/ft_split.c mandatory/color.c mandatory/draw.c mandatory/clean.c mandatory/print_grid.c mandatory/draw_utiliz.c mandatory/helper_function.c \
+	mandatory/ft_strtol.c
+BOF = bonus/fdf_bonus.c bonus/ft_split.c
 ML_F = -lmlx -lXext -lX11 -Lminilibx_folder
 MATH = -lm
 

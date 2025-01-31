@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:24:04 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/30 21:31:26 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:13:42 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ long int	*parsing(char **d)
 	{
 		c = ft_split(d[i], ",");
 		if (c[1])
-			g_dd[i] = strtol(c[1], NULL, 16);
+			g_dd[i] = ft_strtol(c[1], 16);
 		else
 			g_dd[i] = 0xffffff;
 		free_split(c);

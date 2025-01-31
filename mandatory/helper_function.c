@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:23:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/30 21:31:15 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:14:04 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_help_read(int ***map, char ***d, int line_size)
 	k = 0;
 	while ((*d)[fd])
 	{
-		(*map)[k][h] = strtol((*d)[fd], NULL, 10);
+		(*map)[k][h] = ft_strtol((*d)[fd], 10);
 		h++;
 		if (h == line_size)
 		{
@@ -74,4 +74,27 @@ void	ft_help_read(int ***map, char ***d, int line_size)
 		}
 		fd++;
 	}
+}
+
+void	adjust_scale(t_p *p)
+{
+	if (p->scale > 20)
+		p->scale = 15;
+	else if (p->scale == 5)
+		p->scale = 3;
+	else
+		p->scale = 1;
+}
+
+void	calculate_grid_params(t_cord **main, t_p *p)
+{
+	p->scale_x = (WINDOW_SIZE / (*main)->line_size);
+	p->scale_y = (WINDOW_SIZE / (*main)->line);
+	if (p->scale_x < p->scale_y)
+		p->scale = p->scale_x;
+	else
+		p->scale = p->scale_y;
+	p->grid_center_x = ((*main)->line_size - 1) / 2;
+	p->grid_center_y = ((*main)->line - 1) / 2;
+	adjust_scale(p);
 }

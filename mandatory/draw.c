@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:23:23 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/30 14:31:45 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:58:52 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,59 +29,46 @@ int	interpolate(int start, int end, float t)
 	return ((int)(start + t * (end - start)));
 }
 
-void	draw_line_image(t_image *image, int x1, int y1, int x2, int y2, int color1, int color2)
+void	draw_line_image(t_image *image, int x1, int y1, t_p *p)
 {
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
-	int		steps;
-	int		i;
-	int		r;
-	float	t;
-	int		g;
-	int		b;
-	int		cre_color;
-	int		r1;
-	int		r2;
-	int		g1;
-	int		g2;
-	int		b1;
-	int		b2;
-	int		e2;
+	t_l	d;
 
-	i = 0;
-	dy = abs(y2 - y1);
-	dx = abs(x2 - x1);
-	ft_ternaries_1(&dx, &dy, &steps);
-	err = dx - dy;
-	ft_ternaries_2(&y1, &y2, &sy);
-	ft_ternaries_2(&x1, &x2, &sx);
-	extract_rgb(color1, &r1, &g1, &b1);
-	extract_rgb(color2, &r2, &g2, &b2);
-	while (i <= steps)
+	d.i = 0;
+	d.dy = abs(p->y2 - y1);
+	d.dx = abs(p->x2 - x1);
+	ft_ternaries_1(&d.dx, &d.dy, &d.steps);
+	d.err = d.dx - d.dy;
+	ft_ternaries_2(&y1, &p->y2, &d.sy);
+	ft_ternaries_2(&x1, &p->x2, &d.sx);
+	extract_rgb(p->color, &d.r1, &d.g1, &d.b1);
+	extract_rgb(p->color2, &d.r2, &d.g2, &d.b2);
+	while (d.i <= d.steps)
 	{
-		ft_ternaries_3(&i, &steps, &t);
-		r = interpolate(r1, r2, t);
-		g = interpolate(g1, g2, t);
-		b = interpolate(b1, b2, t);
-		cre_color = create_color(r, g, b);
-		put_pixel_to_image(image, x1, y1, cre_color);
-		if (x1 == x2 && y1 == y2)
+		ft_ternaries_3(&d.i, &d.steps, &d.t);
+		d.r = interpolate(d.r1, d.r2, d.t);
+		d.g = interpolate(d.g1, d.g2, d.t);
+		d.b = interpolate(d.b1, d.b2, d.t);
+		d.cre_color = create_color(d.r, d.g, d.b);
+		put_pixel_to_image(image, x1, y1, d.cre_color);
+		if (x1 == p->x2 && y1 == p->y2)
 			break ;
-		e2 = 2 * err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x1 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y1 += sy;
-		}
-		i++;
+		d.e2 = 2 * d.err;
+		help_draw_func(&d, &x1, &y1);
+		d.i++;
+	}
+}
+
+void	help_draw_func(t_l *d, int *x1, int *y1)
+{
+	if (d->e2 > -d->dy)
+	{
+		d->err -= d->dy;
+		(*x1) += d->sx;
+	}
+	if (d->e2 < d->dx)
+	{
+		d->err += d->dx;
+		(*y1) += d->sy;
 	}
 }
 
