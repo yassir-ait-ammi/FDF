@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 11:51:04 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/02 11:54:49 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:30:24 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,23 @@ int	ft_atoi(char *str)
 int	is_digit(char c)
 {
 	return (c >= '0' && c <= '9');
+}
+
+int	more_prs(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	i -= 3;
+	if (str[i] != 'f')
+		return (1);
+	i--;
+	if (str[i] != '.')
+		return (1);
+	i--;
+	if (i == 0)
+		return (1);
+	return (0);
 }

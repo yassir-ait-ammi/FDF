@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 10:31:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/02 11:55:04 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:54:14 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	parsing_the_map(int ac, char **av, t_data *data, long int **g_dd)
 
 	if (ac != 2)
 	{
-		printf("Usage: ./fdf <file map name>\n");
+		write(2, "Usage: ./fdf <file map name>\n", 30);
 		exit(1);
 	}
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error opening file");
+		write(2, "Error opening file\n", 20);
 		cleanup(data, g_dd);
 		exit(1);
 	}
-	if (read(fd, &buf, 1) == 0)
+	if (read(fd, &buf, 1) == 0 || buf == '\n')
 	{
-		printf("Error :invalid map\n");
+		write(2, "Error : invalid map\n", 21);
 		cleanup(data, g_dd);
 		exit(1);
 	}
@@ -50,19 +50,19 @@ void	prs_the_fd(char *str)
 	i--;
 	if (str[i] != 'f')
 	{
-		printf("Error : invalid argument !!\n");
+		write(2, "Error : invalid argument !!\n", 29);
 		exit(1);
 	}
 	i--;
 	if (str[i] != 'd')
 	{
-		printf("Error : invalid argument !!\n");
+		write(2, "Error : invalid argument !!\n", 29);
 		exit(1);
 	}
 	i--;
-	if (str[i] != 'f')
+	if (more_prs(str))
 	{
-		printf("Error : invalid argument !!\n");
+		write(2, "Error : invalid argument !!\n", 29);
 		exit(1);
 	}
 }
@@ -97,7 +97,7 @@ void	ft_handle_the_error(char *filename, t_data *data)
 	{
 		free(fd.s);
 		free_split(fd.d);
-		printf("Error : invalid map\n");
+		write(2, "Error : invalid map\n", 21);
 		exit(1);
 	}
 	free(fd.s);
@@ -113,7 +113,8 @@ int	ft_help_the_handle(char **str)
 	while (str[i])
 	{
 		j = 0;
-		while (str[i][j])
+		while (str[i][j] && str[i][j] != ','
+			&& str[i][j] != '-' && str[i][j] != '+')
 		{
 			if (!(is_digit(str[i][j])))
 				return (0);
