@@ -6,37 +6,11 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:23:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/31 21:14:04 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:28:00 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	parsing_the_map(int ac, char **av, t_data *data, long int **g_dd)
-{
-	char	buf;
-	int		fd;
-
-	if (ac != 2)
-	{
-		printf("Usage: ./fdf <file map name>\n");
-		exit(1);
-	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error opening file");
-		cleanup(data, g_dd);
-		exit(1);
-	}
-	if (read(fd, &buf, 1) == 0)
-	{
-		printf("Error :invalid map\n");
-		cleanup(data, g_dd);
-		exit(1);
-	}
-	close(fd);
-}
 
 void	help_read_map(int *fd, const char *filename, int *k, int *h)
 {
@@ -65,7 +39,7 @@ void	ft_help_read(int ***map, char ***d, int line_size)
 	k = 0;
 	while ((*d)[fd])
 	{
-		(*map)[k][h] = ft_strtol((*d)[fd], 10);
+		(*map)[k][h] = ft_atoi((*d)[fd]);
 		h++;
 		if (h == line_size)
 		{

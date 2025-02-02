@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 08:21:42 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/22 15:10:17 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:46:33 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,3 @@ char	**ft_split(char *str, char *charset)
 	yas[i] = 0;
 	return (yas);
 }
-
-/*#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	int		index;
-	char	**split;
-	(void)	argc;
-	split = ft_split(argv[1], argv[2]);
-	index = 0;
-	while (split[index])
-	{
-		printf("%s\n", split[index]);
-		index++;
-	}
-}*/

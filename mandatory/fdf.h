@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/31 21:26:34 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:54:00 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,19 @@ typedef struct s_l
 	int		e2;
 }		t_l;
 
+int			ft_help_the_handle(char **str);
+int			is_digit(char c);
+int			ft_strlen_2(char **str);
+void		ft_handle_the_error(char *filename, t_data *data);
+int			ft_strlen(char *str, char *charset);
+void		prs_the_fd(char *str);
+int			ft_atoi(char *str);
+int			close_window(void *param);
 long		help_strtol(const char *str, int base, int sign);
 long		ft_strtol(const char *str, int base);
 int			main(int ac, char **av);
 char		**ft_split(char *s, char *charset);
 long int	*parsing(char **d);
-int			render(void *param);
 int			count_word(char *s);
 int			**read_map(const char *filename,
 				int *lines, int *line_size, long int **g_dd);

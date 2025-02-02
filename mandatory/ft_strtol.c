@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:15 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/31 21:30:41 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/01 09:57:04 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,14 @@ long	ft_strtol(const char *str, int base)
 		str += 2;
 	result = help_strtol(str, base, sign);
 	return (result * sign);
+}
+
+int	close_window(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	cleanup(data, NULL);
+	exit(0);
+	return (0);
 }

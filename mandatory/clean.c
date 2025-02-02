@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:26:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/30 14:45:40 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:17:43 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	free_map(int **map, int lines)
 
 void	cleanup(t_data *data, long int **g_dd)
 {
+	if (g_dd)
+		return ;
 	if (data->image.img)
 		mlx_destroy_image(data->mlx, data->image.img);
 	if (data->win)

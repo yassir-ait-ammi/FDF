@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:24:04 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/31 21:13:42 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:36:09 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	main(int ac, char **av)
 	long int	*g_dd;
 
 	parsing_the_map(ac, av, &data, &g_dd);
-	g_dd = NULL;
 	main = malloc(sizeof(t_cord));
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WINDOW_SIZE, WINDOW_SIZE, "Yassir");
@@ -122,9 +121,10 @@ int	main(int ac, char **av)
 	main->g_dd = &g_dd;
 	print_grid(&main);
 	mlx_put_image_to_window(data.mlx, data.win, data.image.img, 0, 0);
-	free(g_dd);
 	free(main);
+	free(g_dd);
 	mlx_key_hook(data.win, handle_key, &data);
+	mlx_hook(data.win, 17, 0, close_window, &data);
 	mlx_loop(data.mlx);
 	return (cleanup(&data, &g_dd), 0);
 }

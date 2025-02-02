@@ -245,7 +245,7 @@ int **read_map(const char *filename, int *lines, int *line_size)
 	i = 0;
 	while (d[a])
 	{
-		map[i][v] = ft_atoi_base(d[a], NULL, 10);
+		map[i][v] = strtol(d[a], NULL, 10);
 		v++;
 		if (v == *line_size)
 		{
@@ -274,7 +274,7 @@ void parsing(char **d)
 	while (d[i])
 	{
 		c = ft_split(d[i], ",");
-		g_dd[i] = (c[1]) ? ft_atoi_base(c[1], NULL, 16) : 0xffffff;
+		g_dd[i] = (c[1]) ? strtol(c[1], NULL, 16) : 0xffffff;
 		free_split(c);
 		i++;
 	}
@@ -403,13 +403,13 @@ int render(void *param)
     print_grid(&data->image, data->map, data->lines, data->line_size);
     mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
 	mlx_string_put(data->mlx, data->win, 40, 40, 0xFFFFFF, "this is my FDF");
-	mlx_string_put(data->mlx, data->win, 40, 60, 0xFFFFFF, "here a resume of the key and its works :");
+	mlx_string_put(data->mlx, data->win, 40, 60, 0xFFFFFF, "here is a resume of the keys and their use:");
 	mlx_string_put(data->mlx, data->win, 40, 80, 0xFFFFFF, "R -> back to the original | C -> color | V -> anti color");
 	mlx_string_put(data->mlx, data->win, 40, 100, 0xFFFFFF, "U -> up view | D -> down view");
 	mlx_string_put(data->mlx, data->win, 40, 120, 0xFFFFFF, "Z -> to increment | X -> to decrement the z of all the point");
-	mlx_string_put(data->mlx, data->win, 40, 140, 0xFFFFFF, "'6 and 4' -> retate with the X axais");
-	mlx_string_put(data->mlx, data->win, 40, 160, 0xFFFFFF, "'1 and 9' -> retate with the Y axais");
-	mlx_string_put(data->mlx, data->win, 40, 180, 0xFFFFFF, "'2 and 8' -> retate with the Z axais");
+	mlx_string_put(data->mlx, data->win, 40, 140, 0xFFFFFF, "'6 and 4' -> rotate with the X axis");
+	mlx_string_put(data->mlx, data->win, 40, 160, 0xFFFFFF, "'1 and 9' -> rotate with the Y axis");
+	mlx_string_put(data->mlx, data->win, 40, 180, 0xFFFFFF, "'2 and 8' -> rotate with the Z axis");
 	mlx_string_put(data->mlx, data->win, 40, 200, 0xFFFFFF, "use the mouse to zoom in and zoom out");
 	mlx_string_put(data->mlx, data->win, 40, 220, 0xFFFFFF, "arrows are to move the map the way you like");
 	mlx_string_put(data->mlx, data->win, 40, 240, 0xFFFFFF, "I hope that you like it!");
