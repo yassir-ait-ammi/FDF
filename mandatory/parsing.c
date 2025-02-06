@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 10:31:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/02 14:54:14 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:55:09 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	parsing_the_map(int ac, char **av, t_data *data, long int **g_dd)
 		cleanup(data, g_dd);
 		exit(1);
 	}
-	if (read(fd, &buf, 1) == 0 || buf == '\n')
+	prs_the_fd(av[1]);
+	if (read(fd, &buf, 1) == 0 || buf == '\n' || buf == ',')
 	{
 		write(2, "Error : invalid map\n", 21);
 		cleanup(data, g_dd);
 		exit(1);
 	}
 	close(fd);
-	prs_the_fd(av[1]);
 	ft_handle_the_error(av[1], data);
 }
 
