@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:26:09 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 19:33:29 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:37:27 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	more_prs(char *str)
 	int	i;
 
 	i = 0;
-	if (str[0] == '.')
-		return (1);
 	while (str[i])
 		i++;
 	i -= 3;
@@ -67,15 +65,9 @@ int	more_prs(char *str)
 	i--;
 	if (str[i] != '.')
 		return (1);
-	i--;
-	if (str[i] == '/')
+	if (i == 0)
 		return (1);
-	while (str[i])
-	{
-		if (str[i] == '/')
-			break ;
-		i--;
-	}
+	i--;
 	if (str[i] == '/' && str[i + 1] == '.')
 		return (1);
 	return (0);
