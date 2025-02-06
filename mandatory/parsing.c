@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 10:31:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 19:22:25 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:24:54 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,9 @@ int	ft_help_the_handle(char **str)
 		j = 0;
 		while (str[i][j])
 		{
-			if (str[i][j] == ',' || str[i][j] == '-' || str[i][j] == '+')
+			if (str[i][j] == ',')
+				break ;
+			if (str[i][j] == '-' || str[i][j] == '+')
 				j++;
 			if (!(is_digit(str[i][j])))
 				a++;
