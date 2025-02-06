@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 11:51:04 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 19:18:47 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:32:58 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	help_atoi(int sign)
 {
 	if (sign > 0)
-		return (INT_MAX);
+		return (214748364);
 	else
-		return (INT_MIN);
+		return (-214748364);
 }
 
 int	ft_atoi(char *str)
