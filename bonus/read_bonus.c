@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:56:30 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 16:01:48 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:39:19 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	count_lines_and_chars(const char *filename, int *k, int *h)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error opening file");
+		write(2, "Error opening file\n", 20);
 		exit(1);
 	}
 	while (read(fd, &buf, 1) > 0)

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 16:21:38 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:38:37 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 
 # include <mlx.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
 # include <math.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
 
 # define ESC_KEY 65307
 # define WINDOW_SIZE 1000
