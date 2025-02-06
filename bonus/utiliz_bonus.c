@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:42:04 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 16:10:47 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:38:55 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,17 @@ void	help_read_map(int *fd, const char *filename, int *k, int *h)
 		(*k)++;
 	}
 	close(*fd);
+}
+
+void	more_handel(int fd)
+{
+	char	buf;
+
+	read(fd, &buf, 1);
+	if (!(buf >= '0' && buf <= '9') && buf != '-' && buf != '+'
+		&& buf != ' ' && buf != ',' && buf != '\n')
+	{
+		write(2, "Error : invalid map\n", 21);
+		exit(1);
+	}
 }

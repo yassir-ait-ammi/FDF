@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/02 14:40:54 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:29:54 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,6 @@ void		adjust_scale(t_p *p);
 void		help_draw_func(t_l *d, int *x1, int *y1);
 void		parsing_the_map(int ac, char **av, t_data *data, long int **g_dd);
 void		help_read_map(int *fd, const char *filename, int *k, int *h);
+void		more_handel(int fd);
 
 #endif
