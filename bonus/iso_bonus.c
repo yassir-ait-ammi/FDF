@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:03:27 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/05 16:47:15 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:05:06 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	ft_rotate_y(t_iso *iso, int *x, int *z, double angle)
 	*x = iso->new_x;
 }
 
-void	isometric(t_data *data, int *x, int *y, int z)
+void	isometric(t_data *data, int *x, int *y, int z, double angle)
 {
 	t_iso	iso;
 
@@ -45,11 +45,11 @@ void	isometric(t_data *data, int *x, int *y, int z)
 	iso.prev_x = *x;
 	iso.prev_y = *y;
 	if (data->z_offset)
-		ft_rotate_z(&iso, x, y, data->angle);
+		ft_rotate_z(&iso, x, y, angle);
 	if (data->x_offset)
-		ft_rotate_x(&iso, y, &z, data->angle);
+		ft_rotate_x(&iso, y, &z, angle);
 	if (data->y_offset)
-		ft_rotate_y(&iso, x, &z, data->angle);
+		ft_rotate_y(&iso, x, &z, angle);
 	iso.iso_x = (*x - *y) * cos(0.523599);
 	iso.iso_y = (*x + *y) * sin(0.523599) - z;
 	*x = iso.iso_x;

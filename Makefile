@@ -6,7 +6,7 @@
 #    By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 09:32:32 by dpoveda-          #+#    #+#              #
-#    Updated: 2025/02/05 16:04:43 by yaait-am         ###   ########.fr        #
+#    Updated: 2025/02/05 12:04:05 by yaait-am         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ NAME_BONUS = .bonus
 NAME = .name
 SRC = mandatory/fdf.c mandatory/ft_split.c mandatory/color.c mandatory/draw.c mandatory/clean.c mandatory/print_grid.c mandatory/draw_utiliz.c mandatory/helper_function.c \
 	mandatory/ft_strtol.c mandatory/parsing.c mandatory/atoi.c
-BOF = bonus/fdf_bonus.c bonus/ft_split.c bonus/print_grid_bonus.c bonus/color_bonus.c bonus/clean_bonus.c bonus/draw_bonus.c bonus/iso_bonus.c bonus/key_hook.c bonus/mouse_render_hook.c \
-		bonus/utiliz.c
+BOF = bonus/fdf_bonus.c bonus/ft_split.c bonus/print_grid_bous.c bonus/color_bonus.c bonus/clean_bonus.c bonus/draw_bonus.c bonus/iso_bonus.c
 ML_F = -lmlx -lXext -lX11 -Lminilibx_folder
 MATH = -lm
 

@@ -6,20 +6,20 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/05 16:49:09 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:41:58 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_BONUS_H
 # define FDF_BONUS_H
 
-# include <mlx.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <math.h>
-# include <string.h>
+#include <mlx.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <math.h>
+#include <string.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 
@@ -89,41 +89,43 @@ typedef struct s_data
 	int			y2;
 	int			color;
 	int			color2;
-}				t_data;
+} t_data;
 
 typedef struct s_iso
 {
-	int			prev_x;
-	int			prev_y;
-	int			new_x;
-	int			new_y;
-	int			new_z;
-	int			iso_x;
-	int			iso_y;
-}				t_iso;
+	int	prev_x;
+	int	prev_y;
+	int	new_x;
+	int	new_y;
+	int	new_z;
+	int	iso_x;
+	int	iso_y;
+}	t_iso;
+
 
 typedef struct s_d
 {
-	int			dx;
-	int			dy;
-	int			sx;
-	int			sy;
-	int			err;
-	int			steps;
-	int			r1;
-	int			g1;
-	int			b1;
-	int			r2;
-	int			g2;
-	int			b2;
-	int			i;
-	int			r;
-	int			g;
-	int			b;
-	int			i_color;
-	int			e2;
-	float		t;
-}				t_d;
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int err;
+	int steps;
+	int r1;
+	int g1;
+	int b1;
+	int r2;
+	int g2;
+	int b2;
+	int i;
+	int r;
+	int g;
+	int b;
+	int i_color;
+	int e2;
+	float t;
+}		t_d;
+
 
 typedef struct s_point
 {
@@ -131,10 +133,6 @@ typedef struct s_point
 	int			y;
 	int			z;
 	int			color;
-	int			x1;
-	int			y1;
-	int			z1;
-	int			color1;
 }				t_point;
 
 typedef struct s_draw_info
@@ -151,24 +149,21 @@ void				parsing(char **d, t_data *data);
 int					render(void *param);
 void				print_grid(t_data *data);
 void				ft_help(int z, int *color, t_data *data);
-void				isometric(t_data *data, int *x, int *y, int z);
+void				isometric(t_data *data, int *x, int *y, int z, double angle);
 void				ft_z(t_data *data, int *z);
 void				put_pixel_to_image(t_image *image, int x, int y, int color);
 int					interpolate(int start, int end, float t);
 void				extract_rgb(int color, int *r, int *g, int *b);
 int					create_color(int r, int g, int b);
-void				draw_line_image(t_image *image, int x1, int y1, t_point *p);
+void				draw_line_image(t_image *image, int x1, int y1, int x2, int y2, int color1, int color2);
 int					count_word(char *s);
 void				free_split(char **split);
-int					**read_map(t_data *data, const char *filename,
-						int *lines, int *line_size);
+int					**read_map(t_data *data, const char *filename, int *lines, int *line_size);
 void				parsing(char **d, t_data *data);
 void				free_map(int **map, int lines);
 void				cleanup(t_data *data);
 int					handle_key(int keycode, void *param);
 int					handle_mouse(int button, int x, int y, void *param);
-int					ft_strlen(char *str, char *charset);
-int					ft_strlen2(char *str);
-void				handle_color_mode(t_data *data, int keycode);
+int					main(int ac, char **av);
 
 #endif
