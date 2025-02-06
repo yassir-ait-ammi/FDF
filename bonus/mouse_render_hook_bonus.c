@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_render_hook.c                                :+:      :+:    :+:   */
+/*   mouse_render_hook_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:14:34 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/05 15:48:24 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:05:52 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	render(void *param)
 	mlx_string_put(data->mlx, data->win, 40, 180, 0xFFFFFF, "2/8 -> Rotate Z");
 	mlx_string_put(data->mlx, data->win, 40, 200, 0xFFFFFF, "Mouse -> Zoom");
 	mlx_string_put(data->mlx, data->win, 40, 220, 0xFFFFFF, "Arrows -> Moving");
-	mlx_string_put(data->mlx, data->win, 40, 240, 0xFFFFFF, "Enjoy!");
+	mlx_string_put(data->mlx, data->win, 40, 240, 0xFFFFFF, "ASC -> Exit");
+	mlx_string_put(data->mlx, data->win, 40, 260, 0xFFFFFF, "Enjoy!");
 	return (0);
 }
 
