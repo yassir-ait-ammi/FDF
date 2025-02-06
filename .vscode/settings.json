@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"stdlib.h": "c",
-		"fdf_bonus.h": "c",
-		"limits.h": "c",
-		"sstream": "cpp"
-	}
-}
