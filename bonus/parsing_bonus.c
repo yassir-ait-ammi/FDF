@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:03:00 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 18:33:16 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:02:40 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	parsing_the_map(int ac, char **av, t_data *data)
 		exit(1);
 	}
 	more_handel(fd);
-	close(fd);
 	ft_handle_the_error(av[1], data);
+	close(fd);
 }
 
 void	prs_the_fd(char *str)
