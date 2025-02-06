@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_grid_bonus.c                                 :+:      :+:    :+:   */
+/*   print_grid_bous.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:25:00 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/05 16:46:38 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:50:56 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	calculate_scale(t_data *data, t_draw_info *info)
 		info->scale = scale_y;
 	if (info->scale > 20)
 		info->scale = data->zoom + 15;
-	if (info->scale == 5)
+	else if (info->scale == 5)
 		info->scale = data->zoom + 3;
 	else
 		info->scale = data->zoom + 1;
@@ -55,11 +55,10 @@ static void	draw_connections(t_image *image, t_point p, t_data *data,
 		p.x1 = (info->x + 1) * info->scale;
 		p.y1 = info->y * info->scale;
 		p.z1 = data->map[info->y][info->x + 1];
-		ft_z(data, &p.z1);
 		isometric(data, &p.x1, &p.y1, p.z1);
 		p.x1 += info->x_offset;
 		p.y1 += info->y_offset;
-		p.color1 = data->g_dd[(info->y + 1) * data->line_size + info->x];
+		p.color1 = data->g_dd[info->y * data->line_size + info->x + 1];
 		draw_line_image(image, p.x, p.y, &p);
 	}
 	if (info->y + 1 < data->lines)
@@ -67,7 +66,6 @@ static void	draw_connections(t_image *image, t_point p, t_data *data,
 		p.x1 = info->x * info->scale;
 		p.y1 = (info->y + 1) * info->scale;
 		p.z1 = data->map[info->y + 1][info->x];
-		ft_z(data, &p.z1);
 		isometric(data, &p.x1, &p.y1, p.z1);
 		p.x1 += info->x_offset;
 		p.y1 += info->y_offset;
