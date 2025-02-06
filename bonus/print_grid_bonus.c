@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_grid_bous.c                                  :+:      :+:    :+:   */
+/*   print_grid_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:25:00 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 15:50:56 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:44:15 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	draw_connections(t_image *image, t_point p, t_data *data,
 		p.x1 = (info->x + 1) * info->scale;
 		p.y1 = info->y * info->scale;
 		p.z1 = data->map[info->y][info->x + 1];
+		ft_z(data, &p.z1);
 		isometric(data, &p.x1, &p.y1, p.z1);
 		p.x1 += info->x_offset;
 		p.y1 += info->y_offset;
@@ -66,6 +67,7 @@ static void	draw_connections(t_image *image, t_point p, t_data *data,
 		p.x1 = info->x * info->scale;
 		p.y1 = (info->y + 1) * info->scale;
 		p.z1 = data->map[info->y + 1][info->x];
+		ft_z(data, &p.z1);
 		isometric(data, &p.x1, &p.y1, p.z1);
 		p.x1 += info->x_offset;
 		p.y1 += info->y_offset;
