@@ -6,14 +6,14 @@
 #    By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 09:32:32 by dpoveda-          #+#    #+#              #
-#    Updated: 2025/02/06 16:11:27 by yaait-am         ###   ########.fr        #
+#    Updated: 2025/02/07 11:03:06 by yaait-am         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc  -Wall -Wextra -Werror
 TARGET = fdf
-NAME_BONUS = .bonus
 NAME = .name
+NAME_BONUS = .bonus
 SRC = mandatory/fdf.c mandatory/ft_split.c mandatory/color.c mandatory/draw.c mandatory/clean.c mandatory/print_grid.c mandatory/draw_utiliz.c mandatory/helper_function.c \
 	mandatory/ft_strtol.c mandatory/parsing.c mandatory/atoi.c
 BOF = bonus/fdf_bonus.c bonus/ft_split_bonus.c bonus/print_grid_bonus.c bonus/color_bonus.c bonus/clean_bonus.c bonus/draw_bonus.c bonus/iso_bonus.c bonus/key_hook_bonus.c \

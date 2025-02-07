@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 15:56:30 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 16:39:19 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:35:26 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	fill_map(int **map, char **d, int *line_size)
 	i = 0;
 	while (d[a])
 	{
-		map[i][v] = strtol(d[a], NULL, 10);
+		map[i][v] = ft_atoi(d[a]);
 		v++;
 		if (v == *line_size)
 		{
