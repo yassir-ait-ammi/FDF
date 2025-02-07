@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:25:54 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/01/31 15:58:38 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:41:32 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	setup_grid_offset(t_p *p)
 	p->x1 = p->grid_center_x * p->scale;
 	p->y1 = p->grid_center_y * p->scale;
 	isometric(&p->x1, &p->y1, 0);
-	p->x_offset = (WINDOW_SIZE / 2) - p->x1;
-	p->y_offset = (WINDOW_SIZE / 2) - p->y1;
+	p->x_offset = (WINDOW_X / 2) - p->x1;
+	p->y_offset = (WINDOW_Y / 2) - p->y1;
 }
 
 static void	draw_point(t_cord **main, t_p *p)

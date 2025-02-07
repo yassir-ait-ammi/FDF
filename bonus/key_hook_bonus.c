@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook.c                                         :+:      :+:    :+:   */
+/*   key_hook_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:13:51 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/05 15:57:06 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:45:46 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	handle_rotation(t_data *data, int keycode)
 static void	recreate_image(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->image.img);
-	data->image.img = mlx_new_image(data->mlx, WINDOW_SIZE, WINDOW_SIZE);
+	data->image.img = mlx_new_image(data->mlx, WINDOW_X, WINDOW_Y);
 	data->image.addr = mlx_get_data_addr(data->image.img, &data->image.b_p_pex,
 			&data->image.len, &data->image.endian);
 	print_grid(data);

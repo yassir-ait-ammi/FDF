@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:34:25 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/05 12:14:25 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:44:33 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	put_pixel_to_image(t_image *image, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x >= 0 && x < WINDOW_SIZE && y >= 0 && y < WINDOW_SIZE)
+	if (x >= 0 && x < WINDOW_X && y >= 0 && y < WINDOW_Y)
 	{
 		dst = image->addr +(y * image->len + x * (image->b_p_pex / 8));
 		*(unsigned int *)dst = color;

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:23:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/02 14:37:43 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:43:08 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	adjust_scale(t_p *p)
 
 void	calculate_grid_params(t_cord **main, t_p *p)
 {
-	p->scale_x = (WINDOW_SIZE / (*main)->line_size);
-	p->scale_y = (WINDOW_SIZE / (*main)->line);
+	p->scale_x = (WINDOW_X / (*main)->line_size);
+	p->scale_y = (WINDOW_Y / (*main)->line);
 	if (p->scale_x < p->scale_y)
 		p->scale = p->scale_x;
 	else

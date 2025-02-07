@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:26:56 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 16:34:12 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:44:14 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	main(int ac, char **av)
 
 	parsing_the_map(ac, av, &data);
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, WINDOW_SIZE, WINDOW_SIZE, "Si Yassir");
+	data.win = mlx_new_window(data.mlx, WINDOW_X, WINDOW_Y, "Si Yassir");
 	data.map = read_map(&data, av[1], &data.lines, &data.line_size);
-	data.image.img = mlx_new_image(data.mlx, WINDOW_SIZE, WINDOW_SIZE);
+	data.image.img = mlx_new_image(data.mlx, WINDOW_X, WINDOW_Y);
 	data.image.addr = mlx_get_data_addr(data.image.img, &data.image.b_p_pex,
 			&data.image.len, &data.image.endian);
 	data.angle = 0.0;
