@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/07 15:35:06 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/08 10:01:03 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ int					more_prs(char *str);
 void				help_read_map(int *fd, const char *filename, int *k,
 						int *h);
 int					close_window(void *param);
-void				more_handel(int fd);
+void				more_handel(int fd, char c);
 int					ft_atoi(char *str);
 
 #endif
