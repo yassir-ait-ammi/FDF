@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/08 10:01:49 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:53:31 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_l
 	int		e2;
 }		t_l;
 
+int			is_space(char *s);
 int			more_prs(char *str);
 int			ft_help_the_handle(char **str);
 int			is_digit(char c);

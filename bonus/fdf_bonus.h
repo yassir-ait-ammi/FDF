@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 11:09:11 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/08 10:01:03 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:58:10 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct s_fd
 }		t_fd;
 
 char				**ft_split(char *s, char *charset);
+int					is_space(char *s);
 void				parsing(char **d, t_data *data);
 int					render(void *param);
 void				print_grid(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 11:51:04 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/02/06 21:35:05 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:02:04 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,16 @@ int	more_prs(char *str)
 	if (str[i] == '/' && str[i + 1] == '.')
 		return (1);
 	return (0);
+}
+
+int	is_space(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == ',')
+		i++;
+	if (s[i])
+		return (0);
+	return (1);
 }
